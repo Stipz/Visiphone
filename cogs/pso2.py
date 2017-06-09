@@ -59,7 +59,7 @@ class PSO2:
         """EQ-related commands"""
 
         if ctx.invoked_subcommand is None:
-            await self.bot.say('Incorrect subcommand passed. Do ``+help eq`` for the available subcommands.')
+            await self.bot.say('Incorrect subcommand passed. Do ``&help eq`` for the available subcommands.')
 
     @eq.command()
     async def last(self):
@@ -101,7 +101,7 @@ class PSO2:
                 i += 1
 
             string = '\n'.join(eqs)
-            message = ':mega: **%s JST Emergency Quest Notice**\n\n%s' % (eqtime, string)
+            message = ':loudspeaker: **Last Emergency Quest Update:** JP Time: `%s00HRS`\n\n%s' % (eqtime, string)
 
             await self.bot.say(message)
 
