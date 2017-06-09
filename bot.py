@@ -4,10 +4,9 @@ from discord.ext import commands
 
 description = '''A bot focused on alerting for Emergency Quests on PSO2.\nSupport: https://discord.gg/0xMXCNAFbH032Ig1'''
 
-bot = commands.Bot(command_prefix=['+'], description=description)
+bot = commands.Bot(command_prefix=['&'], description=description)
 
 extensions = [
-    'cogs.general',
     'cogs.pso2',
     'cogs.macro',
     'cogs.quotes',
@@ -50,5 +49,4 @@ if __name__ == '__main__':
 
     bot.loop.create_task(checkPSO2EQ(bot))
     bot.loop.create_task(changeGame(bot))
-    bot.loop.create_task(gdqTopic(bot))
     bot.run(token)
