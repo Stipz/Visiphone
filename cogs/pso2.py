@@ -161,7 +161,7 @@ class PSO2:
                                 iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\n\n``Ship 01:`` {:,.0f}\n``Ship 02:`` {:,.0f}\n``Ship 03:`` {:,.0f}\n``Ship 04:`` {:,.0f}\n``Ship 05:`` {:,.0f}\n``Ship 06:`` {:,.0f}\n``Ship 07:`` {:,.0f}\n``Ship 08:`` {:,.0f}\n``Ship 09:`` {:,.0f}\n``Ship 10:`` {:,.0f}\n".format(result["EnName"], result["JpName"]
                                                                           , result["PriceInfo"][9]["Price"]
                                                                           , result["PriceInfo"][8]["Price"]
-                                                                          , result["PriceInfo"][2]["Price"]
+                                                                          , result["PriceInfo"][6]["Price"]
                                                                           , result["PriceInfo"][7]["Price"]
                                                                           , result["PriceInfo"][3]["Price"]
                                                                           , result["PriceInfo"][5]["Price"]
