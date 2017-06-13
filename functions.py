@@ -70,10 +70,10 @@ async def checkPSO2EQ(bot):
                     #Builds string
                     string = '\n'.join(eqs)
                     rodos2 = '\n'.join(rodos)
-
+                    message2 = 'Scheduled EQs (Time in JST): '
                     message = (':loudspeaker: EQ Forecast '
                                'for the next hour : __JST:__ **{:02d}00HRS** / '
-                               '__GMT+8:__ **{:02d}00HRS** / __GMT+7:__ **{:02d}00HRS**\n\n{}\n\n{}\n'.format(eqtime, eqph, eqth, string, rodos2))
+                               '__GMT+8:__ **{:02d}00HRS** / __GMT+7:__ **{:02d}00HRS**\n{}\n{}'.format(eqtime, eqph, eqth, message2, string, rodos2))
                  #   message = ('JP Time:`{:02d}00HRS` PH/SG/MY Time: `{:02d}00HRS`|TH Time:`{:02d}00HRS`'
                  #              '**Time 1: ** `{:02d}00HRS`|**Time 2: ** `{:02d}00HRS`|**Time 3: ** `{:02d}00HRS`|**Time 4: ** `{:02d}00HRS`|**Time 5: ** `{:02d}00HRS`|'
                  #              '**Time 6: ** `{:02d}00HRS`|**Time 7: ** `{:02d}00HRS`|**Time 8: ** `{:02d}00HRS`|**Time 9: ** `{:02d}00HRS`|**Time 10: ** `{:02d}00HRS`|'
@@ -125,8 +125,8 @@ async def gdqTopic(bot):
                             nextName = nextInfo[0].a.text
                             nextRunner = nextInfo[1].text.replace("\n", "")
 
-                            server = bot.get_server("80919069628313600")
-                            channel = server.get_channel("267215903660310528")
+                            server = bot.get_server("")
+                            channel = server.get_channel("")
 
                             string = """**Now:** {} ({}) - \n**Next:** {} ({})
 **Stream:** http://twitch.tv/gamesdonequick
