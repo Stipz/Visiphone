@@ -144,6 +144,46 @@ class PSO2:
             await self.bot.say("EQ alerts are not enabled on this channel.")
 
     @commands.command(pass_context=True)
+    async def price(self, ctx, *, itemname : str):
+        """Looks up the price of an item."""
+
+        async with aiohttp.ClientSession() as session:
+            url = "http://db.kakia.org/item/search?name={0}".format(itemname.replace(" ", "%20"))
+            r = await session.get(url)
+            if r.status == 200:
+                js = await r.json()
+                iteminfo = []
+
+                if js:
+                    if len(js) >= 1 and len(js) <= 20:
+                        for result in js:
+                            if result["EnName"]:
+                                iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\n\n``Ship 01:`` {:,.0f}\n``Ship 02:`` {:,.0f}\n``Ship 03:`` {:,.0f}\n``Ship 04:`` {:,.0f}\n``Ship 05:`` {:,.0f}\n``Ship 06:`` {:,.0f}\n``Ship 07:`` {:,.0f}\n``Ship 08:`` {:,.0f}\n``Ship 09:`` {:,.0f}\n``Ship 10:`` {:,.0f}\n".format(result["EnName"], result["JpName"]
+                                                                          , result["PriceInfo"][0]["Price"]
+                                                                          , result["PriceInfo"][1]["Price"]
+                                                                          , result["PriceInfo"][2]["Price"]
+                                                                          , result["PriceInfo"][3]["Price"]
+                                                                          , result["PriceInfo"][4]["Price"]
+                                                                          , result["PriceInfo"][5]["Price"]
+                                                                          , result["PriceInfo"][6]["Price"]
+                                                                          , result["PriceInfo"][7]["Price"]
+                                                                          , result["PriceInfo"][8]["Price"]
+                                                                          , result["PriceInfo"][9]["Price"]))
+                                #iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
+                        string = "\n".join(iteminfo)
+                        #message = "{} Here are the results of your query:\n{}".format(ctx.message.author.mention, string)
+                        message = "**Here are the results of your PRICE query:**\n\n{}".format(string)
+                        await self.bot.say(message)
+
+                    elif len(js) > 20:
+                        await self.bot.say("{} Found too many items matching {}. Please try a more specific search.".format(ctx.message.author.mention, itemname))
+
+                else:
+                    await self.bot.say("{} Could not find ``{}``.".format(ctx.message.author.mention, itemname))
+
+
+
+    @commands.command(pass_context=True)
     async def item(self, ctx, *, itemname : str):
         """Looks up JP name of an item."""
 
@@ -155,16 +195,17 @@ class PSO2:
                 iteminfo = []
 
                 if js:
-                    if len(js) >= 1 and len(js) <= 10:
+                    if len(js) >= 1 and len(js) <= 20:
                         for result in js:
                             if result["EnName"]:
-                                iteminfo.append("``EN Name:`` {} // ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
-
+                                iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
+                                #iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
                         string = "\n".join(iteminfo)
-                        message = "{}\n{}".format(string, ctx.message.author.mention)
+                        #message = "{} Here are the results of your query:\n{}".format(ctx.message.author.mention, string)
+                        message = "**Here are the results of your query:**\n\n{}".format(string)
                         await self.bot.say(message)
 
-                    elif len(js) > 10:
+                    elif len(js) > 20:
                         await self.bot.say("{} Found too many items matching {}. Please try a more specific search.".format(ctx.message.author.mention, itemname))
 
                 else:
