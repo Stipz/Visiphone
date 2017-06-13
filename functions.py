@@ -70,7 +70,7 @@ async def checkPSO2EQ(bot):
                     #Builds string
                     string = '\n'.join(eqs)
                     rodos2 = '\n'.join(rodos)
-                    message2 = 'Scheduled EQs (Time in JST): '
+                    message2 = '(*Scheduled EQs below are in JST*)\n'
                     message = (':loudspeaker: EQ Forecast '
                                'for the next hour : __JST:__ **{:02d}00HRS** / '
                                '__GMT+8:__ **{:02d}00HRS** / __GMT+7:__ **{:02d}00HRS**\n{}\n{}'.format(eqtime, eqph, eqth, message2, string, rodos2))
