@@ -73,7 +73,7 @@ async def checkPSO2EQ(bot):
                     #message2 = '(*Scheduled EQs below are in JST*)\n'
                     message = (':loudspeaker: EQ Forecast '
                                'for the next hour : __JST:__ **{:02d}00HRS** / '
-                               '__GMT+8:__ **{:02d}00HRS** / __GMT+7:__ **{:02d}00HRS**\n{}\n{}'.format(eqtime, eqph, eqth, string, rodos2))
+                               '__GMT+8:__ **{:02d}00HRS** / __GMT+7:__ **{:02d}00HRS**\n\n{}\n{}'.format(eqtime, eqph, eqth, string, rodos2))
                  #   message = ('JP Time:`{:02d}00HRS` PH/SG/MY Time: `{:02d}00HRS`|TH Time:`{:02d}00HRS`'
                  #              '**Time 1: ** `{:02d}00HRS`|**Time 2: ** `{:02d}00HRS`|**Time 3: ** `{:02d}00HRS`|**Time 4: ** `{:02d}00HRS`|**Time 5: ** `{:02d}00HRS`|'
                  #              '**Time 6: ** `{:02d}00HRS`|**Time 7: ** `{:02d}00HRS`|**Time 8: ** `{:02d}00HRS`|**Time 9: ** `{:02d}00HRS`|**Time 10: ** `{:02d}00HRS`|'
