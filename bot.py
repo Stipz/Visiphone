@@ -30,9 +30,9 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     if member.server.id == '80900839538962432':
-        role = discord.utils.get(member.server.roles, name='Members')
+        role = discord.utils.get(member.server.roles, name='Squadmates')
         await bot.add_roles(member, role)
-        await bot.send_message(discord.Object("80900839538962432"), '{}, Welcome to GIGAS PSO2 Discord.'.format(member.mention))
+        await bot.send_message(discord.Object("118779107218554880"), '{}, Welcome to GIGAS PSO2 Discord.'.format(member.mention))
 
 
 if __name__ == '__main__':
