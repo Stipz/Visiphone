@@ -115,21 +115,21 @@ class PSO2:
         else:
             await self.bot.say("EQ alerts are not enabled on this channel.")
 
-    @commands.command(pass_context=True)
-    async def price(self, ctx, *, itemname : str):
-        """Looks up the price of an item."""
-
-        async with aiohttp.ClientSession() as session:
-            url = "http://db.kakia.org/item/search?name={0}".format(itemname.replace(" ", "%20"))
-            r = await session.get(url)
-            if r.status == 200:
-                js = await r.json()
-                iteminfo = []
-
-                if js:
-                    if len(js) >= 1 and len(js) <= 1:
-                        for result in js:
-                            if result["EnName"]:
+ #  @commands.command(pass_context=True)
+ #  async def price(self, ctx, *, itemname : str):
+ #      """Looks up the price of an item."""
+ #
+ #       async with aiohttp.ClientSession() as session:
+ #           url = "http://db.kakia.org/item/search?name={0}".format(itemname.replace(" ", "%20"))
+ #           r = await session.get(url)
+ #           if r.status == 200:
+ #               js = await r.json()
+ #               iteminfo = []
+ #
+ #               if js:
+ #                   if len(js) >= 1 and len(js) <= 1:
+ #                       for result in js:
+ #                           if result["EnName"]:
                                 #iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\n\n``Ship 01:`` {:,.0f}\n``Ship 02:`` {:,.0f}\n``Ship 03:`` {:,.0f}\n``Ship 04:`` {:,.0f}\n``Ship 05:`` {:,.0f}\n``Ship 06:`` {:,.0f}\n``Ship 07:`` {:,.0f}\n``Ship 08:`` {:,.0f}\n``Ship 09:`` {:,.0f}\n``Ship 10:`` {:,.0f}\n".format(result["EnName"], result["JpName"]
                                 #                                          , result["PriceInfo"][9]["Price"]
                                 #                                          , result["PriceInfo"][4]["Price"]
@@ -141,18 +141,18 @@ class PSO2:
                                 #                                          , result["PriceInfo"][0]["Price"]
                                 #                                          , result["PriceInfo"][3]["Price"]
                                 #                                          , result["PriceInfo"][1]["Price"]))
-                                iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\nPrice: {:,.0f}\n".format(result["EnName"], result["JpName"] , result["PriceInfo"][8]["Price"]))
-                        string = "\n".join(iteminfo)
+#                                iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\nPrice: {:,.0f}\n".format(result["EnName"], result["JpName"] , result["PriceInfo"][8]["Price"]))
+#                        string = "\n".join(iteminfo)
                         #message = "{} Here are the results of your query:\n{}".format(ctx.message.author.mention, string)
-                        message = "{} Here are the results of your [price] query: \n{}\n".format(ctx.message.author.mention, string)
-                        await self.bot.say(message)
-
-                    elif len(js) > 60:
-                        await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
-
-                else:
-                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``.".format(itemname))
-
+#                        message = "{} Here are the results of your [price] query: \n{}\n".format(ctx.message.author.mention, string)
+#                        await self.bot.say(message)
+#
+#                    elif len(js) > 60:
+#                        await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
+#
+#                else:
+#                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``.".format(itemname))
+#
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     
     @commands.command(pass_context=True)
