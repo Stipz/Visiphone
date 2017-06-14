@@ -127,7 +127,7 @@ class PSO2:
                 iteminfo = []
 
                 if js:
-                    if len(js) >= 1 and len(js) <= 35:
+                    if len(js) >= 1 and len(js) <= 54:
                         for result in js:
                             if result["EnName"]:
                                 iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\n\n``Ship 01:`` {:,.0f}\n``Ship 02:`` {:,.0f}\n``Ship 03:`` {:,.0f}\n``Ship 04:`` {:,.0f}\n``Ship 05:`` {:,.0f}\n``Ship 06:`` {:,.0f}\n``Ship 07:`` {:,.0f}\n``Ship 08:`` {:,.0f}\n``Ship 09:`` {:,.0f}\n``Ship 10:`` {:,.0f}\n".format(result["EnName"], result["JpName"]
@@ -141,14 +141,14 @@ class PSO2:
                                                                           , result["PriceInfo"][2]["Price"]
                                                                           , result["PriceInfo"][0]["Price"]
                                                                           , result["PriceInfo"][1]["Price"]))
-                                #iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
+                                
                         string = "\n".join(iteminfo)
-                        #message = "{} Here are the results of your query:\n{}".format(ctx.message.author.mention, string)
+                        
                         message = "Here are the results of your **price** query:\n\n{}".format(string)
                         await self.bot.say(message)
 
-                    elif len(js) > 35:
-                        await self.bot.say("{} Found too many items matching {}. Please try a more specific search.".format(ctx.message.author.mention, itemname))
+                    elif len(js) > 55:
+                        await self.bot.say("Sorry Master, I found too many items matching {}. Please try a more specific search.".format(itemname))
 
                 else:
                     await self.bot.say("{} Could not find ``{}``.".format(ctx.message.author.mention, itemname))
@@ -167,21 +167,21 @@ class PSO2:
                 iteminfo = []
 
                 if js:
-                    if len(js) >= 1 and len(js) <= 35:
+                    if len(js) >= 1 and len(js) <= :
                         for result in js:
                             if result["EnName"]:
-                                iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
-                                #iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
+                                iteminfo.append("``EN Name:`` {} || ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
+                                
                         string = "\n".join(iteminfo)
-                        #message = "{} Here are the results of your query:\n{}".format(ctx.message.author.mention, string)
+                        
                         message = "Here are the results of your **item** query:\n\n{}".format(string)
                         await self.bot.say(message)
 
-                    elif len(js) > 35:
-                        await self.bot.say("{} Found too many items matching {}. Please try a more specific search.".format(ctx.message.author.mention, itemname))
+                    elif len(js) > 55:
+                        await self.bot.say("Sorry Master, I found too many items matching {}. Please try a more specific search.".format(itemname))
 
                 else:
-                    await self.bot.say("{} Could not find ``{}``.".format(ctx.message.author.mention, itemname))
+                    await self.bot.say("Sorry Master, I couldn't find ``{}``, Please check your spelling or pasted item name.".format(itemname))
 
 def setup(bot):
     bot.add_cog(PSO2(bot))
