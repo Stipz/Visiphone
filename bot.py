@@ -2,15 +2,12 @@ from functions import *
 from settings import *
 from discord.ext import commands
 
-description = '''A bot focused on alerting for Emergency Quests on PSO2.\nSupport: https://discord.gg/0xMXCNAFbH032Ig1'''
+description = '''Team GIGAS Bot for PSO2 EQ Alerts and Item search.'''
 
-bot = commands.Bot(command_prefix=['&'], description=description)
+bot = commands.Bot(command_prefix=['+'], description=description)
 
 extensions = [
     'cogs.pso2',
-    'cogs.macro',
-    'cogs.quotes',
-    'cogs.gdq'
 ]
 
 
