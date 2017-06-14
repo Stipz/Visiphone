@@ -144,7 +144,7 @@ class PSO2:
                                 iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\n\n Price: {:,.0f}".format(result["EnName"], result["JpName"] , result["PriceInfo"][8]["Price"]))
                         string = "\n".join(iteminfo)
                         #message = "{} Here are the results of your query:\n{}".format(ctx.message.author.mention, string)
-                        message = "{} Here are the results of your [price] query: \n\n{}".format(ctx.message.author.mention, string)
+                        message = "{} Here are the results of your [price] query: \n{}\n".format(ctx.message.author.mention, string)
                         await self.bot.say(message)
 
                     elif len(js) > 60:
