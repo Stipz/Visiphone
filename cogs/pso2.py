@@ -26,40 +26,12 @@ class PSO2:
 
         await self.bot.say(embed=data)
 
-    @commands.command()
-    async def builds(self):
-        data = discord.Embed(colour=discord.Colour.red())
-        data.set_author(name="Meta Builds", icon_url="http://img.informer.com/icons/png/48/3365/3365560.png")
-
-        hunter = "[Hu/Fi](https://goo.gl/CA7Eos)\n[Hu/Br (Dragonslayer)](https://goo.gl/3SkU17)"
-        data.add_field(name="Hunter", value=hunter)
-
-        ranger = "[Ra/Hu](https://goo.gl/86sIbw)\n[Ra/Br](https://goo.gl/6vgczQ)"
-        data.add_field(name="Ranger", value=ranger)
-
-        force = "[Fo/Te (Fire/Dark)](https://goo.gl/aoGhhw)\n[Fo/Te (Ice/Light)](https://goo.gl/XMNgpr)"
-        data.add_field(name="Force", value=force)
-
-        fighter = "[Fi/Hu](https://goo.gl/7sdiyQ)"
-        data.add_field(name="Fighter", value=fighter)
-
-        gunner = "[Gu/Hu](https://goo.gl/TZf5Hk)\n[Gu/Ra](https://goo.gl/JNz9tM)"
-        data.add_field(name="Gunner", value=gunner)
-
-        techer = "[Te/Br](https://goo.gl/byxDgK)\n[Te/Hu](https://goo.gl/ggHROJ)"
-        data.add_field(name="Techer", value=techer)
-
-        bouncer = "[Bo/Hu (Dual Blades)](https://goo.gl/pexGnC)\n[Bo/Hu (Jet Boots)](https://goo.gl/b3lmg6)\n[Bo/Hu (Hybrid)](https://goo.gl/IcWGLM)"
-        data.add_field(name="Bouncer", value=bouncer)
-
-        await self.bot.say(embed=data)
-
     @commands.group(pass_context=True)
     async def eq(self, ctx):
         """EQ-related commands"""
 
         if ctx.invoked_subcommand is None:
-            await self.bot.say('Incorrect subcommand passed. Do ``&help eq`` for the available subcommands.')
+            await self.bot.say('Incorrect subcommand passed. Do ``+help eq`` for the available subcommands.')
 
     @eq.command()
     async def last(self):
@@ -138,7 +110,7 @@ class PSO2:
             with open('cogs/json/eq_channels.json', 'w') as outfile:
                 json.dump(eq_channels, outfile)
 
-            await self.bot.say("EQ alerts successfully disabled on this channel.")
+            await self.bot.say("EQ alerts now disabled on this channel.")
 
         else:
             await self.bot.say("EQ alerts are not enabled on this channel.")
