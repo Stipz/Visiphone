@@ -177,7 +177,7 @@ class PSO2:
                         message = "{} Here are the results of your [item] query:\n\n{}".format(ctx.message.author.mention, string)
                         await self.bot.say(message)
 
-                    elif len(js) > 40:
+                    elif len(js) > 32:
                         await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
 
                 else:
