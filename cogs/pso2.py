@@ -167,7 +167,7 @@ class PSO2:
                 iteminfo = []
 
                 if js:
-                    if len(js) >= 1 and len(js) <= 20:
+                    if len(js) >= 1 and len(js) <= 40:
                         for result in js:
                             if result["EnName"]:
                                 iteminfo.append("``EN Name:`` {} || ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
