@@ -167,20 +167,21 @@ class PSO2:
                 iteminfo = []
 
                 if js:
-                    if len(js) >= 1 and len(js) <= 35:
+                    if len(js) >= 1 and len(js) <= 41:
                         for result in js:
                             if result["EnName"]:
-                                iteminfo.append("EN Name: {} | JP Name: {}".format(result["EnName"], result["JpName"]))
+                                iteminfo.append("``{}`` || {}".format(result["EnName"], result["JpName"]))
                                 
                         string = "\n".join(iteminfo)
                         
-                        message = "{}Found matches: \n\n{}".format(ctx.message.author.mention, string)
+                        message = "{}, Found matches: \n\n{}".format(ctx.message.author.mention, string)
+                        await self.bot.say(message)
 
-                    elif len(js) > 99:
+                    elif len(js) > 41:
                         await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
 
                 else:
-                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``, Please check your spelling or pasted item name.".format(ctx.message.author.mention, itemname))
+                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``, Please check your spelling or copied text.".format(ctx.message.author.mention, itemname))
 
 def setup(bot):
     bot.add_cog(PSO2(bot))
