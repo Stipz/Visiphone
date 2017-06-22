@@ -170,12 +170,11 @@ class PSO2:
                     if len(js) >= 1 and len(js) <= 35:
                         for result in js:
                             if result["EnName"]:
-                                iteminfo.append("``EN Name:`` {} | JP Name: {}".format(result["EnName"], result["JpName"]))
+                                iteminfo.append("EN Name: {} | JP Name: {}".format(result["EnName"], result["JpName"]))
                                 
                         string = "\n".join(iteminfo)
                         
-                        message = "{} Here are the results of your ``+ item`` query:\n\n{}".format(ctx.message.author.mention, string)
-                        await self.bot.say(message)
+                        message = "{}Found matches: \n\n{}".format(ctx.message.author.mention, string)
 
                     elif len(js) > 99:
                         await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
