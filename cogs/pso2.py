@@ -154,7 +154,7 @@ class PSO2:
 #                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``.".format(itemname))
 #
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    
+              
     @commands.command(pass_context=True)
     async def item(self, ctx, *, itemname : str):
         """Looks up JP name of an item."""
