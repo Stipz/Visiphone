@@ -92,7 +92,7 @@ async def checkPSO2EQ(bot):
                             json.dump(js[0], file)
 
             except Exception as e:
-                await bot.send_message(discord.Object("218384826749681664"), repr(e))
+                await bot.send_message(discord.Object("326524511409274880"), repr(e))
                 continue
 
         await asyncio.sleep(5)
