@@ -22,8 +22,9 @@ async def checkPSO2EQ(bot):
 
                     eqtime = js[0]['jst']
                     equtc = (eqtime - 9) % 24
-                    eqph = (eqtime - 1) % 24
-                    eqth = (eqtime - 2) % 24
+                    eqpst = (eqtime - 16) % 24
+                    eqest = (eqtime - 13) % 24
+                    eqgmt = (eqtime - 6) % 24
                     eqs = []
                     rodos = []
 
@@ -70,14 +71,12 @@ async def checkPSO2EQ(bot):
                     #Builds string
                     string = '\n'.join(eqs)
                     rodos2 = '\n'.join(rodos)
-                    #message2 = '(*Scheduled EQs below are in JST*)\n'
-                    message = (':loudspeaker: EQ Forecast '
-                               'for the next hour : __JST:__ **{:02d}00HRS** / '
-                               '__GMT+8:__ **{:02d}00HRS** / __GMT+7:__ **{:02d}00HRS**\n\n{}\n{}'.format(eqtime, eqph, eqth, string, rodos2))
-                 #   message = ('JP Time:`{:02d}00HRS` PH/SG/MY Time: `{:02d}00HRS`|TH Time:`{:02d}00HRS`'
-                 #              '**Time 1: ** `{:02d}00HRS`|**Time 2: ** `{:02d}00HRS`|**Time 3: ** `{:02d}00HRS`|**Time 4: ** `{:02d}00HRS`|**Time 5: ** `{:02d}00HRS`|'
-                 #              '**Time 6: ** `{:02d}00HRS`|**Time 7: ** `{:02d}00HRS`|**Time 8: ** `{:02d}00HRS`|**Time 9: ** `{:02d}00HRS`|**Time 10: ** `{:02d}00HRS`|'
-                 #              .format(eqtime, eqph, eqth, eqtime1, eqtime2, eqtime3, eqtime4, eqtime5, eqtime6, eqtime7, eqtime8, eqtime9, eqtime10))
+
+                    donation = ':love_letter: Support me on Patreon! <http://patreon.kazesenoue.moe>'
+
+                    message = (':arrow_right: **Emergency Quest '
+                               'Notice\n:watch:{:02d} JST / {:02d} UTC /'
+                               ' {:02d} PST / {:02d} EST / {:02d} GMT +3**\n\n{}\n\n{}\n\n{}'.format(eqtime, equtc, eqpst, eqest, eqgmt, string, rodos2, donation))
 
                     # Checks if current EQ is different from the last one
                     # recorded AND if there is an EQ
@@ -92,7 +91,7 @@ async def checkPSO2EQ(bot):
                             json.dump(js[0], file)
 
             except Exception as e:
-                await bot.send_message(discord.Object("301398772083326976"), repr(e))
+                await bot.send_message(discord.Object("198483667289374720"), repr(e))
                 continue
 
         await asyncio.sleep(5)
@@ -125,8 +124,8 @@ async def gdqTopic(bot):
                             nextName = nextInfo[0].a.text
                             nextRunner = nextInfo[1].text.replace("\n", "")
 
-                            server = bot.get_server("")
-                            channel = server.get_channel("")
+                            server = bot.get_server("80919069628313600")
+                            channel = server.get_channel("267215903660310528")
 
                             string = """**Now:** {} ({}) - \n**Next:** {} ({})
 **Stream:** http://twitch.tv/gamesdonequick
@@ -176,7 +175,7 @@ async def removeEQChannel(chID):
 async def changeGame(bot):
     while not bot.is_closed:
         await bot.wait_until_ready()
-        games = ['+help for commands']
+        games = ['+help', '+donate', 'Prefix is +']
         for gamename in games:
             await bot.change_presence(game=discord.Game(name=gamename))
 
@@ -188,7 +187,7 @@ async def monitorEQs(bot):
         await bot.wait_until_ready()
 
         async with aiohttp.ClientSession() as session:
-            r = await session.get("")
+            r = await session.get("http://pso2.kazesenoue.moe/eq/")
             if r.status == 200:
                 js = await r.json()
 
@@ -211,7 +210,7 @@ async def monitorEQs(bot):
                     await asyncio.sleep(30)
 
                     #Terminates every group
-                    server = bot.get_server("")
+                    server = bot.get_server("171412745302835201")
                     for i in range(1, 4):
                         #Deletes channels and roles
                         role = discord.utils.get(server.roles, name='Ship {}'.format(i))
