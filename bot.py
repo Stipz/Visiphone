@@ -2,16 +2,12 @@ from functions import *
 from settings import *
 from discord.ext import commands
 
-description = '''A bot focused on alerting for Emergency Quests on PSO2.\nSupport: https://discord.gg/0xMXCNAFbH032Ig1'''
+description = '''Team GIGAS Bot for PSO2 EQ Alerts and Item search.'''
 
 bot = commands.Bot(command_prefix=['+'], description=description)
 
 extensions = [
-    'cogs.general',
     'cogs.pso2',
-    'cogs.macro',
-    'cogs.quotes',
-    'cogs.gdq'
 ]
 
 
@@ -33,10 +29,10 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    if member.server.id == '118779107218554880':
+    if member.server.id == '80900839538962432':
         role = discord.utils.get(member.server.roles, name='Members')
         await bot.add_roles(member, role)
-        await bot.send_message(discord.Object("118779107218554880"), '{}, welcome to the PSO2 Discord. Type `+pso2` if you need information regarding the game, and read the #rules.'.format(member.mention))
+        await bot.send_message(discord.Object("80900839538962432"), '{}, Welcome to GIGAS PSO2 Discord.'.format(member.mention))
 
 
 if __name__ == '__main__':
@@ -50,5 +46,4 @@ if __name__ == '__main__':
 
     bot.loop.create_task(checkPSO2EQ(bot))
     bot.loop.create_task(changeGame(bot))
-    bot.loop.create_task(gdqTopic(bot))
     bot.run(token)

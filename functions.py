@@ -22,9 +22,8 @@ async def checkPSO2EQ(bot):
 
                     eqtime = js[0]['jst']
                     equtc = (eqtime - 9) % 24
-                    eqpst = (eqtime - 16) % 24
-                    eqest = (eqtime - 13) % 24
-                    eqgmt = (eqtime - 6) % 24
+                    eqph = (eqtime - 1) % 24
+                    eqth = (eqtime - 2) % 24
                     eqs = []
                     rodos = []
 
@@ -71,13 +70,9 @@ async def checkPSO2EQ(bot):
                     #Builds string
                     string = '\n'.join(eqs)
                     rodos2 = '\n'.join(rodos)
-
-                    donation = ':love_letter: Support me on Patreon! <http://patreon.kazesenoue.moe>'
-
-                    message = (':arrow_right: **Emergency Quest '
-                               'Notice\n:watch:{:02d} JST / {:02d} UTC /'
-                               ' {:02d} PST / {:02d} EST / {:02d} GMT +3**\n\n{}\n\n{}\n\n{}'.format(eqtime, equtc, eqpst, eqest, eqgmt, string, rodos2, donation))
-
+                    message = (':loudspeaker: EQ Forecast '
+                               'for the next hour : __JST:__ **{:02d}00HRS** / '
+                               '__GMT+8:__ **{:02d}00HRS** / __GMT+7:__ **{:02d}00HRS**\n\n{}\n{}'.format(eqtime, eqph, eqth, string, rodos2))
                     # Checks if current EQ is different from the last one
                     # recorded AND if there is an EQ
                     if last_eq['jst'] != eqtime:
@@ -91,60 +86,10 @@ async def checkPSO2EQ(bot):
                             json.dump(js[0], file)
 
             except Exception as e:
-                await bot.send_message(discord.Object("218384826749681664"), repr(e))
+                await bot.send_message(discord.Object("326524511409274880"), repr(e))
                 continue
 
         await asyncio.sleep(5)
-
-async def gdqTopic(bot):
-    while not bot.is_closed:
-        await bot.wait_until_ready()
-
-        async with aiohttp.ClientSession() as session:
-            try:
-                r = await session.get("https://gamesdonequick.com/tracker/runs/agdq2017")
-                if r.status == 200:
-                    js = await r.text()
-                    soup = BeautifulSoup(js, 'html.parser')
-
-                    games = soup.find_all("tr", class_="small")
-
-                    for game in games:
-                        info = game.find_all("td")
-
-                        name = info[0].a.text
-                        runner = info[1].text.replace("\n", "")
-                        start = datetime.strptime(info[3].span.text, "%m/%d/%Y %H:%M:%S %z").replace(tzinfo=pytz.timezone('US/Eastern'))
-                        finish = datetime.strptime(info[4].span.text, "%m/%d/%Y %H:%M:%S %z").replace(tzinfo=pytz.timezone('US/Eastern'))
-                        now = datetime.utcnow().replace(tzinfo=pytz.timezone('US/Eastern'))
-
-                        if start <= now <= finish:
-                            nextGame = games[games.index(game) + 1]
-                            nextInfo = nextGame.find_all("td")
-                            nextName = nextInfo[0].a.text
-                            nextRunner = nextInfo[1].text.replace("\n", "")
-
-                            server = bot.get_server("80919069628313600")
-                            channel = server.get_channel("267215903660310528")
-
-                            string = """**Now:** {} ({}) - \n**Next:** {} ({})
-**Stream:** http://twitch.tv/gamesdonequick
-**Schedule:** https://gamesdonequick.com/schedule
-**Drinking game (YOU'LL FUCKING DIE):** https://i.redd.it/5zagmf8cs38y.png
-
-Twitch player eating dicks?
-**mpv + youtube-dl**: https://mpv.srsfckn.biz/
-**Streamlink:** https://github.com/streamlink/streamlink
-**Streamlink Twitch GUI:** https://github.com/streamlink/streamlink-twitch-gui/releases
-**Chatty:** http://chatty.github.io/""".format(name, runner, nextName, nextRunner)
-
-                            await bot.edit_channel(channel, topic=string)
-
-            except Exception as e:
-                print(e)
-
-        await asyncio.sleep(10)
-
 
 async def sendAlert(message, bot):
     # Loads eq_channels.json
@@ -157,7 +102,6 @@ async def sendAlert(message, bot):
                 await bot.send_message(discord.Object(item), message)
             except:
                 pass
-
 
 async def removeEQChannel(chID):
     # Loads eq_channels.json file
@@ -175,7 +119,7 @@ async def removeEQChannel(chID):
 async def changeGame(bot):
     while not bot.is_closed:
         await bot.wait_until_ready()
-        games = ['+help', '+donate', 'Prefix is +']
+        games = ['+help for commands']
         for gamename in games:
             await bot.change_presence(game=discord.Game(name=gamename))
 
@@ -187,7 +131,7 @@ async def monitorEQs(bot):
         await bot.wait_until_ready()
 
         async with aiohttp.ClientSession() as session:
-            r = await session.get("http://pso2.kazesenoue.moe/eq/")
+            r = await session.get("")
             if r.status == 200:
                 js = await r.json()
 
@@ -210,7 +154,7 @@ async def monitorEQs(bot):
                     await asyncio.sleep(30)
 
                     #Terminates every group
-                    server = bot.get_server("171412745302835201")
+                    server = bot.get_server("")
                     for i in range(1, 4):
                         #Deletes channels and roles
                         role = discord.utils.get(server.roles, name='Ship {}'.format(i))
