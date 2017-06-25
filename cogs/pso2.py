@@ -8,52 +8,6 @@ class PSO2:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def pso2(self):
-        data = discord.Embed(colour=discord.Colour.red())
-        data.set_author(name="Phantasy Star Online 2", icon_url="http://img.informer.com/icons/png/48/3365/3365560.png")
-
-        info = "[News](http://bumped.org/psublog)\n[Reddit](http://reddit.com/r/pso2)\n[Guides](http://fulldive.nu)\n[Forums](http://pso-world.com)\n[Wiki](https://pso2.arks-visiphone.com)"
-        data.add_field(name="Information", value=info)
-
-        downloads = "[Launcher](http://arks-layer.com)\n[Mods](https://goo.gl/M8PpWh)"
-        data.add_field(name="Downloads", value=downloads)
-
-        translations = "English Patch: :ballot_box_with_check:\nStory Patch: :ballot_box_with_check:\nItem Patch: :ballot_box_with_check:"
-        data.add_field(name="Translations", value=translations)
-
-        data.set_footer(text="Those are hyperlinks. Give them a click.")
-
-        await self.bot.say(embed=data)
-
-    @commands.command()
-    async def builds(self):
-        data = discord.Embed(colour=discord.Colour.red())
-        data.set_author(name="Meta Builds", icon_url="http://img.informer.com/icons/png/48/3365/3365560.png")
-
-        hunter = "[Hu/Fi](https://goo.gl/CA7Eos)\n[Hu/Br (Dragonslayer)](https://goo.gl/3SkU17)"
-        data.add_field(name="Hunter", value=hunter)
-
-        ranger = "[Ra/Hu](https://goo.gl/86sIbw)\n[Ra/Br](https://goo.gl/6vgczQ)"
-        data.add_field(name="Ranger", value=ranger)
-
-        force = "[Fo/Te (Fire/Dark)](https://goo.gl/aoGhhw)\n[Fo/Te (Ice/Light)](https://goo.gl/XMNgpr)"
-        data.add_field(name="Force", value=force)
-
-        fighter = "[Fi/Hu](https://goo.gl/7sdiyQ)"
-        data.add_field(name="Fighter", value=fighter)
-
-        gunner = "[Gu/Hu](https://goo.gl/TZf5Hk)\n[Gu/Ra](https://goo.gl/JNz9tM)"
-        data.add_field(name="Gunner", value=gunner)
-
-        techer = "[Te/Br](https://goo.gl/byxDgK)\n[Te/Hu](https://goo.gl/ggHROJ)"
-        data.add_field(name="Techer", value=techer)
-
-        bouncer = "[Bo/Hu (Dual Blades)](https://goo.gl/pexGnC)\n[Bo/Hu (Jet Boots)](https://goo.gl/b3lmg6)\n[Bo/Hu (Hybrid)](https://goo.gl/IcWGLM)"
-        data.add_field(name="Bouncer", value=bouncer)
-
-        await self.bot.say(embed=data)
-
     @commands.group(pass_context=True)
     async def eq(self, ctx):
         """EQ-related commands"""
@@ -101,7 +55,7 @@ class PSO2:
                 i += 1
 
             string = '\n'.join(eqs)
-            message = ':mega: **%s JST Emergency Quest Notice**\n\n%s' % (eqtime, string)
+            message = ':loudspeaker: Last Emergency Quest Update: __JST:__ **%s00HRS**\n\n%s' % (eqtime, string)
 
             await self.bot.say(message)
 
@@ -138,11 +92,11 @@ class PSO2:
             with open('cogs/json/eq_channels.json', 'w') as outfile:
                 json.dump(eq_channels, outfile)
 
-            await self.bot.say("EQ alerts successfully disabled on this channel.")
+            await self.bot.say("EQ alerts now disabled on this channel.")
 
         else:
             await self.bot.say("EQ alerts are not enabled on this channel.")
-
+                 
     @commands.command(pass_context=True)
     async def item(self, ctx, *, itemname : str):
         """Looks up JP name of an item."""
@@ -155,20 +109,21 @@ class PSO2:
                 iteminfo = []
 
                 if js:
-                    if len(js) >= 1 and len(js) <= 10:
+                    if len(js) >= 1 and len(js) <= 41:
                         for result in js:
                             if result["EnName"]:
-                                iteminfo.append("``EN Name:`` {} // ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
-
+                                iteminfo.append("``{}`` || {}".format(result["EnName"], result["JpName"]))
+                                
                         string = "\n".join(iteminfo)
-                        message = "{}\n{}".format(string, ctx.message.author.mention)
+                        
+                        message = "{}, Found matches: \n\n{}".format(ctx.message.author.mention, string)
                         await self.bot.say(message)
 
-                    elif len(js) > 10:
-                        await self.bot.say("{} Found too many items matching {}. Please try a more specific search.".format(ctx.message.author.mention, itemname))
+                    elif len(js) > 41:
+                        await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
 
                 else:
-                    await self.bot.say("{} Could not find ``{}``.".format(ctx.message.author.mention, itemname))
+                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``, Please check your spelling or copied text.".format(ctx.message.author.mention, itemname))
 
 def setup(bot):
     bot.add_cog(PSO2(bot))
