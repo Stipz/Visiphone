@@ -26,6 +26,34 @@ class PSO2:
 
         await self.bot.say(embed=data)
 
+    @commands.command()
+    async def builds(self):
+        data = discord.Embed(colour=discord.Colour.red())
+        data.set_author(name="Meta Builds", icon_url="http://img.informer.com/icons/png/48/3365/3365560.png")
+
+        hunter = "[Hu/Fi](https://goo.gl/CA7Eos)\n[Hu/Br (Dragonslayer)](https://goo.gl/3SkU17)"
+        data.add_field(name="Hunter", value=hunter)
+
+        ranger = "[Ra/Hu](https://goo.gl/86sIbw)\n[Ra/Br](https://goo.gl/6vgczQ)"
+        data.add_field(name="Ranger", value=ranger)
+
+        force = "[Fo/Te (Fire/Dark)](https://goo.gl/aoGhhw)\n[Fo/Te (Ice/Light)](https://goo.gl/XMNgpr)"
+        data.add_field(name="Force", value=force)
+
+        fighter = "[Fi/Hu](https://goo.gl/7sdiyQ)"
+        data.add_field(name="Fighter", value=fighter)
+
+        gunner = "[Gu/Hu](https://goo.gl/TZf5Hk)\n[Gu/Ra](https://goo.gl/JNz9tM)"
+        data.add_field(name="Gunner", value=gunner)
+
+        techer = "[Te/Br](https://goo.gl/byxDgK)\n[Te/Hu](https://goo.gl/ggHROJ)"
+        data.add_field(name="Techer", value=techer)
+
+        bouncer = "[Bo/Hu (Dual Blades)](https://goo.gl/pexGnC)\n[Bo/Hu (Jet Boots)](https://goo.gl/b3lmg6)\n[Bo/Hu (Hybrid)](https://goo.gl/IcWGLM)"
+        data.add_field(name="Bouncer", value=bouncer)
+
+        await self.bot.say(embed=data)
+
     @commands.group(pass_context=True)
     async def eq(self, ctx):
         """EQ-related commands"""
@@ -73,7 +101,7 @@ class PSO2:
                 i += 1
 
             string = '\n'.join(eqs)
-            message = ':loudspeaker: Last Emergency Quest Update: __JST:__ **%s00HRS**\n\n%s' % (eqtime, string)
+            message = ':mega: **%s JST Emergency Quest Notice**\n\n%s' % (eqtime, string)
 
             await self.bot.say(message)
 
@@ -110,51 +138,11 @@ class PSO2:
             with open('cogs/json/eq_channels.json', 'w') as outfile:
                 json.dump(eq_channels, outfile)
 
-            await self.bot.say("EQ alerts now disabled on this channel.")
+            await self.bot.say("EQ alerts successfully disabled on this channel.")
 
         else:
             await self.bot.say("EQ alerts are not enabled on this channel.")
 
-#    @commands.command(pass_context=True)
-#    async def price(self, ctx, *, itemname : str):
-#        """Looks up the price of an item."""
-#
-#        async with aiohttp.ClientSession() as session:
-#            url = "http://db.kakia.org/item/search?name={0}".format(itemname.replace(" ", "%20"))
-#            r = await session.get(url)
-#            if r.status == 200:
-#                js = await r.json()
-#                iteminfo = []
-#
-#                if js:
-#                    if len(js) >= 1 and len(js) <= 60:
-#                        for result in js:
-#                            if result["EnName"]:
-#                                iteminfo.append("``EN Name:`` {} | ``JP Name:`` {}\n\n``Ship 01:`` {:,.0f}\n``Ship 02:`` {:,.0f}\n``Ship 03:`` {:,.0f}\n``Ship 04:`` {:,.0f}\n``Ship 05:`` {:,.0f}\n``Ship 06:`` {:,.0f}\n``Ship 07:`` {:,.0f}\n``Ship 08:`` {:,.0f}\n``Ship 09:`` {:,.0f}\n``Ship 10:`` {:,.0f}\n".format(result["EnName"], result["JpName"]
-#                                                                          , result["PriceInfo"][9]["Price"]
-#                                                                          , result["PriceInfo"][4]["Price"]
-#                                                                          , result["PriceInfo"][7]["Price"]
-#                                                                          , result["PriceInfo"][8]["Price"]
-#                                                                          , result["PriceInfo"][5]["Price"]
-#                                                                          , result["PriceInfo"][6]["Price"]
-#                                                                          , result["PriceInfo"][2]["Price"]
-#                                                                          , result["PriceInfo"][0]["Price"]
-#                                                                          , result["PriceInfo"][3]["Price"]
-#                                                                          , result["PriceInfo"][1]["Price"]))
-#                                #iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
-#                        string = "\n".join(iteminfo)
-#                        #message = "{} Here are the results of your query:\n{}".format(ctx.message.author.mention, string)
-#                        message = "{} Here are the results of your [price] query: \n\n{}".format(ctx.message.author.mention, string)
-#                        await self.bot.say(message)
-#
-#                    elif len(js) > 60:
-#                        await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
-#
-#                else:
-#                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``.".format(itemname))
-#
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    
     @commands.command(pass_context=True)
     async def item(self, ctx, *, itemname : str):
         """Looks up JP name of an item."""
@@ -167,21 +155,20 @@ class PSO2:
                 iteminfo = []
 
                 if js:
-                    if len(js) >= 1 and len(js) <= 41:
+                    if len(js) >= 1 and len(js) <= 10:
                         for result in js:
                             if result["EnName"]:
-                                iteminfo.append("``{}`` || {}".format(result["EnName"], result["JpName"]))
-                                
+                                iteminfo.append("``EN Name:`` {} // ``JP Name:`` {}".format(result["EnName"], result["JpName"]))
+
                         string = "\n".join(iteminfo)
-                        
-                        message = "{}, Found matches: \n\n{}".format(ctx.message.author.mention, string)
+                        message = "{}\n{}".format(string, ctx.message.author.mention)
                         await self.bot.say(message)
 
-                    elif len(js) > 41:
-                        await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
+                    elif len(js) > 10:
+                        await self.bot.say("{} Found too many items matching {}. Please try a more specific search.".format(ctx.message.author.mention, itemname))
 
                 else:
-                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``, Please check your spelling or copied text.".format(ctx.message.author.mention, itemname))
+                    await self.bot.say("{} Could not find ``{}``.".format(ctx.message.author.mention, itemname))
 
 def setup(bot):
     bot.add_cog(PSO2(bot))
