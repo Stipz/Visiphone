@@ -119,7 +119,7 @@ async def removeEQChannel(chID):
 async def changeGame(bot):
     while not bot.is_closed:
         await bot.wait_until_ready()
-        games = ['+help for commands']
+        games = ['NO', '*complains to Stipz*', 'Hi there~']
         for gamename in games:
             await bot.change_presence(game=discord.Game(name=gamename))
 
