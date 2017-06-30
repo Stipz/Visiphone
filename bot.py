@@ -28,10 +28,10 @@ async def on_ready():
     
 @bot.event
 async def on_member_join(member):
-    if member.server.id == '283226616065425410':
+    if member.server.id == '224149747982794752':
         #role = discord.utils.get(member.server.roles, name='Newbie')
         #await bot.add_roles(member, role)
-        await bot.send_message(discord.Object("283226616065425410"), '{} has just joined GIGAS Discord Server.'.format(member.mention))
+        await bot.send_message(discord.Object("224149747982794752"), '{} has just joined GIGAS Discord Server.'.format(member.mention))
 
 if __name__ == '__main__':
     for extension in extensions:
