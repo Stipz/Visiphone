@@ -28,7 +28,7 @@ async def on_ready():
     
 @bot.event
 async def on_member_join(member):
-    if member.server.id == '224149747982794752':
+    if member.server.id == '118779107218554880':
         #role = discord.utils.get(member.server.roles, name='Newbie')
         #await bot.add_roles(member, role)
         await bot.send_message(discord.Object("321615143857291264"), '{} has just joined GIGAS Discord Server.'.format(member.mention))
