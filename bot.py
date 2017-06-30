@@ -25,15 +25,13 @@ async def on_ready():
     print('Cogs: {}'.format(bot.cogs))
     print('---------')
     #app.run('localhost', port=5001)
-
-
+    
 @bot.event
 async def on_member_join(member):
-    if member.server.id == '80900839538962432':
-        role = discord.utils.get(member.server.roles, name='Members')
-        await bot.add_roles(member, role)
-        await bot.send_message(discord.Object("80900839538962432"), '{}, Welcome to GIGAS PSO2 Discord.'.format(member.mention))
-
+    if member.server.id == '283226616065425410':
+        #role = discord.utils.get(member.server.roles, name='Newbie')
+        #await bot.add_roles(member, role)
+        await bot.send_message(discord.Object("283226616065425410"), '{} has just joined GIGAS Discord Server.'.format(member.mention))
 
 if __name__ == '__main__':
     for extension in extensions:
