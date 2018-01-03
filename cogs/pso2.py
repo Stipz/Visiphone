@@ -115,7 +115,6 @@ class PSO2:
                                 iteminfo.append("``{}`` || {}".format(result["EnName"], result["JpName"]))
                                 
                         string = "\n".join(iteminfo)
-                        
                         message = "{}, Found matches: \n\n{}".format(ctx.message.author.mention, string)
                         await self.bot.say(message)
 
