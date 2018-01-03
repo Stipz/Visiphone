@@ -11,7 +11,6 @@ extensions = [
     'cogs.welcome',
 ]
 
-
 @bot.event
 async def on_ready():
     botInfo = await bot.application_info()
