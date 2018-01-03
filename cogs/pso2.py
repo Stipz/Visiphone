@@ -124,35 +124,6 @@ class PSO2:
 
                 else:
                     await self.bot.say("{} Sorry Master, I couldn't find ``{}``, Please check your spelling or copied text.".format(ctx.message.author.mention, itemname))
-
-/!-
-
-    @commands.command(pass_context=True)
-    async def price(self, ctx, *, itemname : str):
-        """Looks up price of an item."""
-
-        async with aiohttp.ClientSession() as session:
-            url = "http://db.kakia.org/item/search?name={0}".format(itemname.replace(" ", "%20"))
-            r = await session.get(url)
-            if r.status == 200:
-                js = await r.json()
-                iteminfo = []
-
-                if js:
-                    if len(js) >= 1 and len(js) <= 41:
-                        for result in js:
-                            if result["EnName"]:
-                                iteminfo.append("``EN Name:`` {} **|** ``JP Name:`` {}".format(result["EnName"], result["JpName"])                                    
-                        string = "\n".join(iteminfo)
-                        
-                        message = "{}, Found matches: \n\n{}".format(ctx.message.author.mention, string)
-                        await self.bot.say(message)
-
-                    elif len(js) > 41:
-                        await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
-
-                else:
-                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``, Please check your spelling or copied text.".format(ctx.message.author.mention, itemname))
-                                    
+                    
 def setup(bot):
     bot.add_cog(PSO2(bot))
