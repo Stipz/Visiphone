@@ -15,7 +15,7 @@ class PSO2:
         if ctx.invoked_subcommand is None:
             await self.bot.say('Incorrect subcommand passed. Do ``+help eq`` for the available subcommands.')
 
-    @eq.command()
+"""    @eq.command()
     async def last(self):
         """Returns last EQ recorded by the bot"""
 
@@ -96,6 +96,7 @@ class PSO2:
 
         else:
             await self.bot.say("EQ alerts are not enabled on this channel.")
+            """
                  
     @commands.command(pass_context=True)
     async def item(self, ctx, *, itemname : str):
@@ -119,10 +120,10 @@ class PSO2:
                         await self.bot.say(message)
 
                     elif len(js) > 41:
-                        await self.bot.say("{} Sorry Master, I found too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
+                        await self.bot.say("{} ERROR: Too many items matching ``{}``. Please try a more specific search.".format(ctx.message.author.mention, itemname))
 
                 else:
-                    await self.bot.say("{} Sorry Master, I couldn't find ``{}``, Please check your spelling or copied text.".format(ctx.message.author.mention, itemname))
+                    await self.bot.say("{} ERROR: No Matches ``{}``, Please check your spelling or copied text.".format(ctx.message.author.mention, itemname))
                     
 def setup(bot):
     bot.add_cog(PSO2(bot))
