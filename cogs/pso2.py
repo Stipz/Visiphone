@@ -112,7 +112,7 @@ class PSO2:
                     if len(js) >= 1 and len(js) <= 41:
                         for result in js:
                             if result["EnName"]:
-                                iteminfo.append("``{}`` || {}".format(result["EnName"], result["JpName"]))
+                                iteminfo.append("``{}`` | {}".format(result["EnName"], result["JpName"]))
                                 
                         string = "\n".join(iteminfo)
                         message = "{}, Found matches: \n\n{}".format(ctx.message.author.mention, string)
